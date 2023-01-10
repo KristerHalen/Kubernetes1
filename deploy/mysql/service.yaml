@@ -1,0 +1,16 @@
+#Needs a port mapping in AddKubernetesToDocker.ps1 when creating the cluster
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+#Setting it as a loadbalancer will give it a temporary ip in Docker and fix the port forwarding
+  type: LoadBalancer
+  ports:
+  - name: mysql
+    port: 3306
+    targetPort: 3306
+  selector:
+    app: mysql

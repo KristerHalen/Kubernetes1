@@ -1,0 +1,102 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{65312B32-3EFA-4D7C-B6A1-FB85A83F544B}"
+	ProjectSection(SolutionItems) = preProject
+		AddKubernetesToDocker.ps1 = AddKubernetesToDocker.ps1
+		ContainerTools.ps1 = ContainerTools.ps1
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{988D9AA6-1044-49AA-BF35-9C9F1051729D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "basesvc", "basesvc", "{0EF5F5BD-26FF-4071-9CF6-29598E12B00D}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\basesvc\kustomization.yaml = deploy\basesvc\kustomization.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grafana", "grafana", "{DA6872BC-8864-46BE-AC3D-8910D1CBE2C2}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\grafana\configmap.yaml = deploy\grafana\configmap.yaml
+		deploy\grafana\deployment.yaml = deploy\grafana\deployment.yaml
+		deploy\grafana\ingress.yaml = deploy\grafana\ingress.yaml
+		deploy\grafana\kustomization.yaml = deploy\grafana\kustomization.yaml
+		deploy\grafana\namespace.yaml = deploy\grafana\namespace.yaml
+		deploy\grafana\persistentvolume.yaml = deploy\grafana\persistentvolume.yaml
+		deploy\grafana\service.yaml = deploy\grafana\service.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "certmanager", "certmanager", "{29754489-54D8-486F-BC6D-33590537CF60}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\certmanager\install.yaml = deploy\certmanager\install.yaml
+		deploy\certmanager\kustomization.yaml = deploy\certmanager\kustomization.yaml
+		deploy\certmanager\namespace.yaml = deploy\certmanager\namespace.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mysql", "mysql", "{496E87C4-474F-420E-B5EC-025F4D255FD7}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\mysql\deployment.yaml = deploy\mysql\deployment.yaml
+		deploy\mysql\ingress.yaml = deploy\mysql\ingress.yaml
+		deploy\mysql\kustomization.yaml = deploy\mysql\kustomization.yaml
+		deploy\mysql\namespace.yaml = deploy\mysql\namespace.yaml
+		deploy\mysql\persistentvolume.yaml = deploy\mysql\persistentvolume.yaml
+		deploy\mysql\service.yaml = deploy\mysql\service.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nats", "nats", "{0324F200-0DF2-408D-AE0C-C19562CEE037}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\nats\configmap.yaml = deploy\nats\configmap.yaml
+		deploy\nats\ingress.yaml = deploy\nats\ingress.yaml
+		deploy\nats\kustomization.yaml = deploy\nats\kustomization.yaml
+		deploy\nats\namespace.yaml = deploy\nats\namespace.yaml
+		deploy\nats\nats.conf = deploy\nats\nats.conf
+		deploy\nats\service.yaml = deploy\nats\service.yaml
+		deploy\nats\statefulset.yaml = deploy\nats\statefulset.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prometheus", "prometheus", "{69C95DEC-5866-4CED-BD8A-A053B81F47C3}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\prometheus\clusterrole.yaml = deploy\prometheus\clusterrole.yaml
+		deploy\prometheus\configmap.yaml = deploy\prometheus\configmap.yaml
+		deploy\prometheus\deployment.yaml = deploy\prometheus\deployment.yaml
+		deploy\prometheus\ingress.yaml = deploy\prometheus\ingress.yaml
+		deploy\prometheus\kustomization.yaml = deploy\prometheus\kustomization.yaml
+		deploy\prometheus\namespace.yaml = deploy\prometheus\namespace.yaml
+		deploy\prometheus\persistentvolume.yaml = deploy\prometheus\persistentvolume.yaml
+		deploy\prometheus\service.yaml = deploy\prometheus\service.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "redis", "redis", "{5E25093D-078A-4247-B483-D6487AF53541}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\redis\deployment.yaml = deploy\redis\deployment.yaml
+		deploy\redis\kustomization.yaml = deploy\redis\kustomization.yaml
+		deploy\redis\namespace.yaml = deploy\redis\namespace.yaml
+		deploy\redis\service.yaml = deploy\redis\service.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sealedsecrets", "sealedsecrets", "{605BE76B-8DF2-408C-9D15-FB703A5063D7}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\sealedsecrets\controller.yaml = deploy\sealedsecrets\controller.yaml
+		deploy\sealedsecrets\kustomization.yaml = deploy\sealedsecrets\kustomization.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0EF5F5BD-26FF-4071-9CF6-29598E12B00D} = {988D9AA6-1044-49AA-BF35-9C9F1051729D}
+		{DA6872BC-8864-46BE-AC3D-8910D1CBE2C2} = {988D9AA6-1044-49AA-BF35-9C9F1051729D}
+		{29754489-54D8-486F-BC6D-33590537CF60} = {988D9AA6-1044-49AA-BF35-9C9F1051729D}
+		{496E87C4-474F-420E-B5EC-025F4D255FD7} = {988D9AA6-1044-49AA-BF35-9C9F1051729D}
+		{0324F200-0DF2-408D-AE0C-C19562CEE037} = {988D9AA6-1044-49AA-BF35-9C9F1051729D}
+		{69C95DEC-5866-4CED-BD8A-A053B81F47C3} = {988D9AA6-1044-49AA-BF35-9C9F1051729D}
+		{5E25093D-078A-4247-B483-D6487AF53541} = {988D9AA6-1044-49AA-BF35-9C9F1051729D}
+		{605BE76B-8DF2-408C-9D15-FB703A5063D7} = {988D9AA6-1044-49AA-BF35-9C9F1051729D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E98CD0B2-F671-442D-B4E9-238E4474AC80}
+	EndGlobalSection
+EndGlobal

@@ -3,9 +3,9 @@ kind: Kustomization
 
 bases:
   - ../certmanager
-  - ../grafana
   - ../mysql
   - ../nats
   - ../prometheus
+  - ../grafana
   - ../redis
   - ../sealedsecrets

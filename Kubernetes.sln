@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		AddKubernetesToDocker.ps1 = AddKubernetesToDocker.ps1
 		ContainerTools.ps1 = ContainerTools.ps1
+		profile.ps1 = profile.ps1
 		readme.md = readme.md
 	EndProjectSection
 EndProject
@@ -80,6 +81,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sealedsecrets", "sealedsecr
 	ProjectSection(SolutionItems) = preProject
 		deploy\sealedsecrets\controller.yaml = deploy\sealedsecrets\controller.yaml
 		deploy\sealedsecrets\kustomization.yaml = deploy\sealedsecrets\kustomization.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nginx-test", "nginx-test", "{A3EC2A6B-3CA9-4FBE-B942-040F97751444}"
+	ProjectSection(SolutionItems) = preProject
+		nginx-test\Dockerfile = nginx-test\Dockerfile
+		nginx-test\nginx-test.ps1 = nginx-test\nginx-test.ps1
+		nginx-test\nginx-test.yaml = nginx-test\nginx-test.yaml
 	EndProjectSection
 EndProject
 Global

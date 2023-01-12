@@ -5,6 +5,5 @@ resources:
 - namespace.yaml
 - service.yaml
 - deployment.yaml
-- ../common
 #Remember to publish port 6379 in k3d-k3s.serverlb:
 #k3d node edit k3d-k3s-serverlb --port-add 6379:6379

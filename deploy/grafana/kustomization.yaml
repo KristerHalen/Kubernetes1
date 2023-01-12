@@ -4,8 +4,8 @@ kind: Kustomization
 
 namespace: monitoring
 
-bases:
-  - ../common
+#bases:
+#  - ../common
 
 resources:
   - namespace.yaml

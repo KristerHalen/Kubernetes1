@@ -7,5 +7,4 @@ namespace: cert-manager
 #  - ../common
 
 resources:
-  #- namespace.yaml
   - install.yaml

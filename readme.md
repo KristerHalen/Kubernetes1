@@ -328,4 +328,29 @@ Open up the file ***./nginx-test/nginx-test.yaml*** in the solution and you will
 To deploy this into K8s we run the command:  
 ```powershell
 kubectl apply -f nginx-test.yaml
+```  
+
+### Update our hosts file
+To make things work from our localhost we need to give this target container a name that identifies the target. As you remember from earlier, this is something that we will fix with the localhost hosts-file.  
+So, open notepad.exe again as administrator and open up the file c:\windows\system32\etc\drivers\hosts and add following lines to it:  
+```text
+127.0.0.1 mynginx
+127.0.0.1 mynginx.local
 ```
+Save the file and we should now be up and running completely.
+
+### Try out the web page
+If you try to run curl against it (or browse to it):  
+```powershell
+curl.exe http://mynginx.local:8081
+-OR-
+Start-Process http://mynginx.local:8081
+```
+You should end up with the content of the default start page for an empty nginx webserver... But this time it's delivered from our cluster, fully scalable!  
+
+### Summary
+We have now created following functionality:  
+![Mynginx](mynginx.png)
+
+
+### MySql Workbench, Nats, Nats CLI, Prometheus, Grafana, K9s, KubeCtl, Kustomize

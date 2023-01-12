@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		AddKubernetesToDocker.ps1 = AddKubernetesToDocker.ps1
 		ContainerTools.ps1 = ContainerTools.ps1
+		K3d-K3s.png = K3d-K3s.png
+		K3d-K3sWithAgents.png = K3d-K3sWithAgents.png
+		k8ssimple.png = k8ssimple.png
+		mynginx.png = mynginx.png
 		profile.ps1 = profile.ps1
 		readme.md = readme.md
 	EndProjectSection

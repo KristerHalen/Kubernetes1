@@ -242,18 +242,19 @@ kubectl apply -k ./deploy/sealedsecrets
 ```
 
 ## The magic Dockerfile
-To be able to build images for our containers/pods we will use Docker CLI, there are some other tools available for this purpose but we will leave them for now.  
+To be able to build our own images for our containers/pods we will use Docker CLI, there are some other tools available for this purpose but we will leave them for now.  
 
 ### Build an image
-The Docker CLI includes the commands ***docker build***, ***docker tag*** and ***docker push*** that allows us to build, tag and deploy an image. We define how it should be built and what operatingsystem it should be based on and for that we use a ***Dockerfile***. A simple ***Dockerfile***, which is a plain textfile, could look like this:  
+The Docker CLI includes the commands ***docker build***, ***docker tag*** and ***docker push*** that allows us to build, tag and deploy an image.  
+We define how the image should be built and what operatingsystem it should be based on by using a ***Dockerfile*** which is a simple ***Dockerfile***, which is a plain textfile that could look like this (This file already exists in the folder ***./nginx-test****):  
 
 ```docker
 FROM nginx:latest
-```
+```  
 
-That's all! What we are defining in this file is that we would like to create our own image based on the official nginx image from Docker Hub. As you can understand there's a lot more into it but that will be explored further later on...  
+That's all! What we are defining in this file is that we would like to create our own image based on the official nginx image from Docker Hub. As you can understand there's a lot more into it but that will be covered later...  
 
-Now from the commandline inside the ***./nginx-test*** folder run following command:  
+Now from a powershell prompt inside the ***./nginx-test*** folder run following command:  
 ```powershell
 docker build -t mynginx .
 ```
@@ -264,7 +265,7 @@ Verify that you got the image by running the command:
 ```powershell
 docker images
 ```
-You will se a list of all the images in your own local cache and you should be able to see the one you just built... The local cache means that it is available for Docker to use.  
+You will se a list of all the images in your own local cache and you should be able to see the one you just built... The local cache means that it is available for Docker to use. Kubernetes on the other hand will not be able to access this cache! 
 
 ### Run an image in Docker
 You could try this image by running the command:  
@@ -291,6 +292,7 @@ docker kill mynginx
 ```
 
 ### Deploy your image to the registry  
+Open a powershell prompt to the solution folder named ***./nginx-test***.  
 First, to be able to redirect our image, we need to re-tag it:  
 ```powershell
 docker tag mynginx registry:5000/mynginx:latest
@@ -317,18 +319,19 @@ It should reply with the json:
 {"repositories":["mynginx"]}
 ```
 
-So, we now have our image as an artifact in the registry...  
+So, we now have our image as an artifact in the registry where Kubernetes is capable of reading it...  
 
 ### Deploy our image as a container/pod in K8s
 Final step to make our build and deploy complete is to use the newly created image and deploy it to K8s.  
-For that we need a *namespace* to put it in, a *deployment* to get it up and running, a *service* to expose it and an *ingress* to make it available from the outside of the cluster.  
+For that we need some configurations, we need a *namespace* to put it in, a *deployment* to get it up and running, a *service* to expose it and an *ingress* to make it available from the outside of the cluster.  
 
 Open up the file ***./nginx-test/nginx-test.yaml*** in the solution and you will see the four configurations we need.  
 
-To deploy this into K8s we run the command:  
+To deploy this into K8s we open a powershell prompt in the folder where the yaml file is located and run the command:  
 ```powershell
 kubectl apply -f nginx-test.yaml
 ```  
+Kubectl will talk with Kubernetes over port 16443 and add the configurations in our file. A deeper explanation will follow at the end of this document!  
 
 ### Update our hosts file
 To make things work from our localhost we need to give this target container a name that identifies the target. As you remember from earlier, this is something that we will fix with the localhost hosts-file.  
@@ -352,5 +355,8 @@ You should end up with the content of the default start page for an empty nginx 
 We have now created following functionality:  
 ![Mynginx](mynginx.png)
 
-
-### MySql Workbench, Nats, Nats CLI, Prometheus, Grafana, K9s, KubeCtl, Kustomize
+Once we are satisfied and do not need mynginx anymore we can delete the mynginx deployment again by simply executing:  
+```
+kubectl delete -f nginx-test.yaml
+```  
+If we delete a configuration then Kubernetes will clean up everything that it created.  

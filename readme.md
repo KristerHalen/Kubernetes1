@@ -1,5 +1,5 @@
 # Kubernetes implemented through Docker, K3s and K3d
-Kubernetes, or as it written, K8s, is simply a container orchestration framework. What this essentially means is that K8s is a system designed to automate the lifecycle of containerized applications — from predictability, scalability to availability.  
+Kubernetes, or as it is written, K8s, is simply a container orchestration framework. What this essentially means is that K8s is a system designed to automate the lifecycle of containerized applications — from predictability, scalability to availability.  
 
 ## Why do we even need Kubernetes?  
 The driving reason behind the rise and need for K8s stems from the increasing use of microservices, away from traditional monolithic-type applications towards a mindset about "single responsibility". As a result, containers provide the perfect host for these individual microservices as containers manage dependencies, are independent, OS-agnostic and ephemeral, amongst other benefits.  
@@ -104,7 +104,7 @@ Url: ***https://github.com/k3d-io/k3d*** and ***https://k3d.io/***
 
 K3d is a utility designed to easily run K3s hosted in Docker, it provides a simple CLI to create, run, delete a fully compliant K8s cluster with 1 to n servernodes.  
 Using K3d we will get at least four containers running in Docker, one tools container that will be used by Docker and K3d to maintain everything, one registry container that will act as a storage for our own images that we would like to deploy to the cluster, one loadbalancer that will act as a proxy between the servernode(s) and our local computer and finally a number of servernodes depending on how we installed it.  
-You could skip the loadbalancer and also the registry and only run the servernode(s) and it's also possible to add something called agents (also called worker-nodes) for each node but we will settle with a basic setup for now.   
+You could skip the loadbalancer and also the registry and only run the servernode(s) and it is also possible to add something called agents (also called worker-nodes) for each node but we will settle with a basic setup for now.   
 
 
 To set up K8s inside Docker we will use the command line tool named K3d. The command for creating a cluster is:  
@@ -346,7 +346,7 @@ curl.exe http://mynginx.local:8081
 -OR-
 Start-Process http://mynginx.local:8081
 ```
-You should end up with the content of the default start page for an empty nginx webserver... But this time it's delivered from our cluster, fully scalable!  
+You should end up with the content of the default start page for an empty nginx webserver... But this time it is delivered from our cluster, fully scalable!  
 
 ### Summary
 We have now created following functionality:  

@@ -329,26 +329,3 @@ To deploy this into K8s we run the command:
 ```powershell
 kubectl apply -f nginx-test.yaml
 ```
-
-## Example 1: BuildVersions NET 7 Backend
-
-## Example 2: BuildVersions Angular 14 Frontend
-nvm install 16.18.1  
-nvm use 16.18.1  
-
-ng generate component BuildVersions --module=app --skip-tests  
-ng generate component BuildVersionEdit --flat --module=app --skip-tests  
-ng generate service ApiService --flat --module=app --skip-tests  
-
-
-## Init cluster with BuildVersions and its BuildVersionsApi  
-In the solutionfolder run following command:  
-*./InitBuild.ps1*  
-Follow that command with:  
-*./InitDeploy.ps1*  
-
-# TODO!
-Make FE, BFF and BE run in the same namespace of the cluster!  
-Add to Dockerfile:  
-RUN apt-get update -y
-RUN apt-get install -y iputils-ping dnsutils

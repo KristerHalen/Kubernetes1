@@ -77,7 +77,9 @@ Everywhere in this document when we refer to K8s or K3s we are talking about our
 ### K3s  
 URL: ***https://github.com/k3s-io/k3s*** and ***https://docs.k3s.io/***
 
-K3s is a very efficient and lightweight fully K8s compliant distribution, it includes:
+Besides the K8s core functionality that is the orchestrator part described in the document [Deep.md](file://Deep.md) we also have some basic cluster services that will make our cluster work better. We will refer to them here as ***Cluster Services***  
+
+K3s is a very efficient and lightweight fully K8s compliant distribution, it includes the cluster services:
 
 ***Flannel***: a very simple L2 overlay network that satisfies the K8s requirements. This is a CNI plugin (Container Network Interface), such as Calico, Romana, Weave-net.  
 Flannel doesn’t support K8s Network Policy, but it can be replaced by Calico if needed.
@@ -178,19 +180,7 @@ It should reply with the empty json:
 {"repositories":[]}  
 ```
 
-## Setting up some base services in our cluster
-### Database server    
-In some of the examples we are using databases, we will use MySql for this purpose. In our solution you will find configurations under deploy/mysql.  
-
-### Event streaming server  
-In some of the examples we are using event streaming, we will use Nats for this purpose. In our solution you will find configurations under deploy/nats.  
-
-### Caching  
-In some of the examples we are using caching, we will use Redis for this purpose. In our solution you will find configurations under deploy/redis.  
-
-### Monitoring
-In some of the examples we are using monitoring, we will use a combination of Prometheus and Grafana for this purpose. In our solution you will find configurations under deploy/prometheus and deploy/grafana.  
-
+## Setting up some base services in our cluster  
 To able to create some more advanced samples along the way we will add support for following services:  
 * ***MySql***, no need for presentation, lightweight sqlbased database server well suited to use in a cluster.  
 * ***Nats***, this is a K8s-compliant EventStreaming server that is capable of high performant, scalable, persistent streams.  
@@ -199,42 +189,49 @@ To able to create some more advanced samples along the way we will add support f
 * ***Redis***, dictionary based cache that is scalable and persistant.  
 * ***SealedSecrets***, this is a cluster service that allows us to store encrypted secrets (connectionstrings etc) in the configuration.  
 
-### Init cluster with MySql  
+### Database server   
+Url: https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/  
+In some of the examples we are using databases, we will use MySql for this purpose. In our solution you will find configurations under deploy/mysql.  
 Explore the content of subfolder deploy/mysql...  
 To configure MySql, in the solutionfolder run following command:  
 ```powershell
 kubectl apply -k ./deploy/mysql
 ```
 
-### Init cluster with Nats  
+### Event streaming server  
+Url: https://nats.io  
+In some of the examples we are using event streaming, we will use Nats for this purpose. In our solution you will find configurations under deploy/nats.  
 Explore the content of subfolder deploy/nats...  
 To configure Nats, in the solutionfolder run following command:  
 ```powershell
 kubectl apply -k ./deploy/nats
 ```  
 
-### Init cluster with Prometheus  
-Explore the content of subfolder deploy/prometheus...  
-To configure Prometheus, in the solutionfolder run following command:  
-```powershell
-kubectl apply -k ./deploy/prometheus
-```  
-
-### Init cluster with Grafana  
-Explore the content of subfolder deploy/grafana...  
-To configure Grafana, in the solutionfolder run following command:  
-```powershell
-kubectl apply -k ./deploy/grafana
-```
-
-### Init cluster with Redis  
+### Caching  
+Url: https://redis.com/redis-enterprise-software/redis-enterprise-on-kubernetes/  
+In some of the examples we are using caching, we will use Redis for this purpose. In our solution you will find configurations under deploy/redis.  
 Explore the content of subfolder deploy/redis...  
 To configure Redis, in the solutionfolder run following command:  
 ```powershell
 kubectl apply -k ./deploy/redis
 ```
 
-### Init cluster with SealedSecrets  
+### Monitoring
+Url: https://github.com/prometheus-operator/kube-prometheus  
+In some of the examples we are using monitoring, we will use a combination of Prometheus and Grafana for this purpose. In our solution you will find configurations under deploy/prometheus and deploy/grafana.  
+Explore the content of subfolder deploy/prometheus and deploy/grafana...  
+To configure Prometheus, in the solutionfolder run following command:  
+```powershell
+kubectl apply -k ./deploy/prometheus
+```  
+To configure Grafana, in the solutionfolder run following command:  
+```powershell
+kubectl apply -k ./deploy/grafana
+```
+
+### Secrets
+Url: https://github.com/bitnami-labs/sealed-secrets  
+In some of the examples we are using secrets to store sensitive data, we will use SealedSecrets for this purpose. In our solution you will find configurations under deploy/sealedsecrets.  
 Explore the content of subfolder deploy/sealedsecrets...  
 To configure SealedSecrets, in the solutionfolder run following command:  
 ```powershell
@@ -244,16 +241,17 @@ kubectl apply -k ./deploy/sealedsecrets
 ## The magic Dockerfile
 To be able to build our own images for our containers/pods we will use Docker CLI, there are some other tools available for this purpose but we will leave them for now.  
 
-### Build an image
-The Docker CLI includes the commands ***docker build***, ***docker tag*** and ***docker push*** that allows us to build, tag and deploy an image.  
-We define how the image should be built and what operatingsystem it should be based on by using a ***Dockerfile*** which is a simple ***Dockerfile***, which is a plain textfile that could look like this (This file already exists in the folder ***./nginx-test****):  
+### Creating a Dockerfile
+We define how the image should be built and what operatingsystem it should be based on by using a ***Dockerfile*** which is a simple textfile that could look like this (This file already exists in the folder ***./nginx-test***):  
 
 ```docker
 FROM nginx:latest
 ```  
 
-That's all! What we are defining in this file is that we would like to create our own image based on the official nginx image from Docker Hub. As you can understand there's a lot more into it but that will be covered later...  
+That's all! What we are defining in this file is that we would like to create our own image based on the official nginx image from Docker Hub. As you propably understand there's a lot more into a Dockerfile but we will cover that later...  
 
+### Build our image with Docker  
+The Docker CLI includes the commands ***docker build***, ***docker tag*** and ***docker push*** that allows us to build, tag and deploy an image.  
 Now from a powershell prompt inside the ***./nginx-test*** folder run following command:  
 ```powershell
 docker build -t mynginx .

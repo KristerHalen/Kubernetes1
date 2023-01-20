@@ -36,6 +36,7 @@ $env:registryhost=$registryhost
 ""
 
 # Verify that you have connection to your registry
+"Trying to connect to registry:"
 curl.exe http://$registryhost/v2/_catalog
 
 "To remove everything regarding cluster, loadbalancer and registry:"

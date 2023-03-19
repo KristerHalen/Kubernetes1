@@ -6,7 +6,7 @@ if($env:Path -notmatch "chocolatey")
 	Set-Alias choco "C:\ProgramData\chocolatey\bin\choco.exe"
 	choco feature enable -n allowGlobalConfirmation
 
-	choco install -force docker-desktop
+#	choco install -force docker-desktop
 	choco install -force conemu
 	choco install -force curl
 	choco install -force kubernetes-cli
@@ -17,7 +17,7 @@ if($env:Path -notmatch "chocolatey")
 else
 {
 	choco upgrade chocolatey
-	choco upgrade -force docker-desktop
+#	choco upgrade -force docker-desktop
 	choco upgrade -force conemu
 	choco upgrade -force k3d
 	choco upgrade -force curl

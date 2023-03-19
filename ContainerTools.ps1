@@ -6,18 +6,18 @@ if($env:Path -notmatch "chocolatey")
 	Set-Alias choco "C:\ProgramData\chocolatey\bin\choco.exe"
 	choco feature enable -n allowGlobalConfirmation
 
-#	choco install -force docker-desktop
 	choco install -force conemu
 	choco install -force curl
 	choco install -force kubernetes-cli
 	choco install -force kustomize
 	choco install -force k9s
 	choco install -force k3d
+	choco install -force gh
+	choco install -force openssl
 }
 else
 {
 	choco upgrade chocolatey
-#	choco upgrade -force docker-desktop
 	choco upgrade -force conemu
 	choco upgrade -force k3d
 	choco upgrade -force curl
@@ -25,6 +25,8 @@ else
 	choco upgrade -force kubernetes-helm
 	choco upgrade -force kustomize
 	choco upgrade -force k9s
+	choco upgrade -force gh
+	choco upgrade -force openssl
 }
 
 # Copy or add the content of this file to your powershell profile to add support for Visual Studio and other tools:

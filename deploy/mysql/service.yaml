@@ -6,11 +6,10 @@ metadata:
   labels:
     app: mysql
 spec:
-#Setting it as a loadbalancer will give it a temporary ip in Docker and fix the port forwarding
   type: LoadBalancer
   ports:
   - name: mysql
-    port: 3306
-    targetPort: 3306
+    port: 3307
+    targetPort: 3307
   selector:
     app: mysql

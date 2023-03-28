@@ -2,8 +2,6 @@
 //https://blog.palark.com/small-local-kubernetes-comparison/
 k3d cluster create k3s --volume C:\Data\K8s:/tmp/shared@server:0 --kubeconfig-update-default --kubeconfig-switch-context --registry-create registry:5000 -p 8080:80@loadbalancer -p 8443:443@loadbalancer -p 3333:3307@loadbalancer -p 4222:4222@loadbalancer -p 8222:8222@loadbalancer -p 6379:6379@loadbalancer  --api-port=16443 --wait --timeout=120s
 
-
-
 #k3d node edit k3d-k3s-serverlb --port-add 3333:3306 --verbose
 # Ports exposed:
 # 8081:80 Use [hostheader]:8081 for web traffic through the loadbalancer (will use ingress/hostheader to redirect)

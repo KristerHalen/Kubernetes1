@@ -16,7 +16,7 @@ spec:
             name: prometheus-service
             port:
               number: 8080
-  - host: "prometheus.jansson.today"
+  - host: "prometheus.ubk3s"
     http:
       paths:
       - pathType: Prefix

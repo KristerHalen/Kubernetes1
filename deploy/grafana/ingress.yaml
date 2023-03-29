@@ -16,7 +16,7 @@ spec:
             name: grafana
             port:
               number: 3000
-  - host: "grafana.jansson.today"
+  - host: "grafana.ubk3s"
     http:
       paths:
       - pathType: Prefix

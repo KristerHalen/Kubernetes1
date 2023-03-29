@@ -35,27 +35,35 @@ kubectl apply -k ./deploy/basesvc
 # Following the k3d command above the value should be: "registry:5000"
 
 $port = (docker port registry).Split(':')[1]
-$registryhost = "registry:$($port)"
+$registryhost = "registry${hostname}:$($port)"
 SETX /M REGISTRYHOST $registryhost
 $env:registryhost=$registryhost
 
-"Add following to C:\Windows\System32\drivers\etc\hosts: "
-"127.0.0.1 registry"
-"127.0.0.1 mysql"
-"127.0.0.1 mysql.local"
-"127.0.0.1 nats"
-"127.0.0.1 nats.local"
-"127.0.0.1 prometheus"
-"127.0.0.1 prometheus.local"
-"127.0.0.1 grafana"
-"127.0.0.1 grafana.local"
-"127.0.0.1 redis"
-"127.0.0.1 redis.local"
+"Add following to C:\Windows\System32\drivers\etc\hosts (In linux /etc/hosts):"
+"127.0.0.1 registry${hostname}"
+"127.0.0.1 mysql${hostname}"
+"127.0.0.1 mysql${hostname}.local"
+"127.0.0.1 nats${hostname}"
+"127.0.0.1 nats${hostname}.local"
+"127.0.0.1 prometheus${hostname}"
+"127.0.0.1 prometheus${hostname}.local"
+"127.0.0.1 grafana${hostname}"
+"127.0.0.1 grafana${hostname}.local"
+"127.0.0.1 redis${hostname}"
+"127.0.0.1 redis${hostname}.local"
 ""
 
 # Verify that you have connection to your registry
 "Trying to connect to registry:"
-curl.exe http://$registryhost/v2/_catalog
-
-"To remove everything regarding cluster, loadbalancer and registry:"
-"k3d cluster delete k3slocal"
+if($hostname -eq "")
+{
+	curl.exe http://$registryhost/v2/_catalog
+	"To remove everything regarding cluster, loadbalancer and registry:"
+	"k3d cluster delete k3s"
+}
+else
+{
+	curl http://$registryhost/v2/_catalog
+	"To remove everything regarding cluster, loadbalancer and registry:"
+	"k3d cluster delete ubk3s"
+}

@@ -1,5 +1,5 @@
 # K3d is a tool to generate a K3s environment in Docker.
-//https://blog.palark.com/small-local-kubernetes-comparison/
+# https://blog.palark.com/small-local-kubernetes-comparison/
 
 $hostname = [System.Net.Dns]::GetHostName()
 
@@ -34,9 +34,8 @@ kubectl apply -k ./deploy/basesvc
 # From CMD-files you can access it as %REGISTRYHOST%
 # Following the k3d command above the value should be: "registry:5000"
 
-$port = (docker port registry).Split(':')[1]
+$port = (docker port registry${hostname}).Split(':')[1]
 $registryhost = "registry${hostname}:$($port)"
-SETX /M REGISTRYHOST $registryhost
 $env:registryhost=$registryhost
 
 "Add following to C:\Windows\System32\drivers\etc\hosts (In linux /etc/hosts):"
@@ -57,12 +56,14 @@ $env:registryhost=$registryhost
 "Trying to connect to registry:"
 if($hostname -eq "")
 {
+	SETX /M REGISTRYHOST $registryhost
 	curl.exe http://$registryhost/v2/_catalog
 	"To remove everything regarding cluster, loadbalancer and registry:"
 	"k3d cluster delete k3s"
 }
 else
 {
+	$env:REGISTRYHOST=$registryhost
 	curl http://$registryhost/v2/_catalog
 	"To remove everything regarding cluster, loadbalancer and registry:"
 	"k3d cluster delete ubk3s"

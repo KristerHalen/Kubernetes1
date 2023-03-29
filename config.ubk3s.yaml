@@ -23,9 +23,6 @@ ports:
   - port: 3333:3307
     nodeFilters:
       - loadbalancer
-  - port: 3333:3307
-    nodeFilters:
-      - loadbalancer
   - port: 4222:4222
     nodeFilters:
       - loadbalancer

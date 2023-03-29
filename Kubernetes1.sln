@@ -94,6 +94,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nginx-test", "nginx-test", 
 	ProjectSection(SolutionItems) = preProject
 		Dockerfile = Dockerfile
 		nginx-test.ps1 = nginx-test.ps1
+		nginx-test.ubk3s.yaml = nginx-test.ubk3s.yaml
 		nginx-test.yaml = nginx-test.yaml
 	EndProjectSection
 EndProject

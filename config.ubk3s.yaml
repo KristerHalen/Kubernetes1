@@ -1,23 +1,26 @@
 apiVersion: k3d.io/v1alpha4
 kind: Simple
 metadata:
-  name: k3s
+  name: ubk3s
 servers: 1
-#kubeAPI: 
+kubeAPI: 
 #  host: "ubk3s"
-#  hostIP: "127.0.0.1"
-#  hostPort: "6443"
-#subnet: "172.28.0.0/16"
+  hostIP: "127.0.0.1"
+  hostPort: "6443"
+subnet: "172.28.0.0/16"
 volumes:
-  - volume: C:/data/k8s:/tmp/shared
+  - volume: /data/k8s:/tmp/shared
     nodeFilters:
       - server:0
       - agent:*
 ports:
-  - port: 8080:80
+  - port: 80:80
     nodeFilters:
       - loadbalancer
-  - port: 8443:443
+  - port: 443:443
+    nodeFilters:
+      - loadbalancer
+  - port: 3333:3307
     nodeFilters:
       - loadbalancer
   - port: 3333:3307
@@ -34,20 +37,20 @@ ports:
       - loadbalancer
 registries:
   create:
-    name: registry
+    name: registry.ubk3s
     host: "0.0.0.0"
     hostPort: "5000"
     volumes:
-      - C:/data/registry:/var/lib/registry # persist registry data locally
+      - /data/registry:/var/lib/registry # persist registry data locally
 options:
   k3d:
     wait: true
     timeout: "60s"
-  #k3s:
-  #  extraArgs:
-  #    - arg: --tls-san=192.168.0.254
-  #      nodeFilters:
-  #        - server:*
+  k3s:
+    extraArgs:
+      - arg: --tls-san=192.168.0.254
+        nodeFilters:
+          - server:*
   kubeconfig:
     updateDefaultKubeconfig: true
     switchCurrentContext: true

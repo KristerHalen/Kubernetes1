@@ -1,10 +1,20 @@
 # K3d is a tool to generate a K3s environment in Docker.
 //https://blog.palark.com/small-local-kubernetes-comparison/
 
-k3d cluster create --config ./config.yaml
+$hostname = [System.Net.Dns]::GetHostName()
+
+if($hostname -ne "ubk3s")
+{
+	$hostname=""
+}
+else
+{
+	$hostname=".${hostname}"
+
+}
+	k3d cluster create --config ./config${hostname}.yaml --api-port=6443
 
 #k3d cluster create k3s --volume C:\Data\K8s:/tmp/shared@server:0 --kubeconfig-update-default --kubeconfig-switch-context --registry-create registry:5000 -p 8080:80@loadbalancer -p 8443:443@loadbalancer -p 3333:3307@loadbalancer -p 4222:4222@loadbalancer -p 8222:8222@loadbalancer -p 6379:6379@loadbalancer --api-port=16443 --wait --timeout=120s
-
 #For k3d/k3s on Ubuntu use:
 #k3d cluster create k3s --volume /data/k8s:/tmp/shared@server:0 --kubeconfig-update-default --kubeconfig-switch-context --registry-create registry:5000 -p 80:80@loadbalancer -p 443:443@loadbalancer -p 3333:3307@loadbalancer -p 4222:4222@loadbalancer -p 8222:8222@loadbalancer -p 6379:6379@loadbalancer  --api-port=6443 --wait --timeout=120s
 

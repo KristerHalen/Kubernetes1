@@ -14,10 +14,6 @@ else
 }
 	k3d cluster create --config ./config${hostname}.yaml --api-port=6443
 
-#k3d cluster create k3s --volume C:\Data\K8s:/tmp/shared@server:0 --kubeconfig-update-default --kubeconfig-switch-context --registry-create registry:5000 -p 8080:80@loadbalancer -p 8443:443@loadbalancer -p 3333:3307@loadbalancer -p 4222:4222@loadbalancer -p 8222:8222@loadbalancer -p 6379:6379@loadbalancer --api-port=16443 --wait --timeout=120s
-#For k3d/k3s on Ubuntu use:
-#k3d cluster create k3s --volume /data/k8s:/tmp/shared@server:0 --kubeconfig-update-default --kubeconfig-switch-context --registry-create registry:5000 -p 80:80@loadbalancer -p 443:443@loadbalancer -p 3333:3307@loadbalancer -p 4222:4222@loadbalancer -p 8222:8222@loadbalancer -p 6379:6379@loadbalancer  --api-port=6443 --wait --timeout=120s
-
 # Ports exposed:
 # 8080:80 Use [hostheader]:8080 for web traffic through the loadbalancer (will use ingress/hostheader to redirect)
 # 8443:443 Use [hostheader]:8443 for web traffic through the loadbalancer (will use ingress/hostheader to redirect)
@@ -58,13 +54,12 @@ if($hostname -eq "")
 {
 	SETX /M REGISTRYHOST $registryhost
 	curl.exe http://$registryhost/v2/_catalog
-	"To remove everything regarding cluster, loadbalancer and registry:"
-	"k3d cluster delete k3s"
 }
 else
 {
 	$env:REGISTRYHOST=$registryhost
 	curl http://$registryhost/v2/_catalog
-	"To remove everything regarding cluster, loadbalancer and registry:"
-	"k3d cluster delete ubk3s"
 }
+
+"To remove everything regarding cluster, loadbalancer and registry:"
+"k3d cluster delete k3s"

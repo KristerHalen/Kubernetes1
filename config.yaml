@@ -3,11 +3,6 @@ kind: Simple
 metadata:
   name: k3s
 servers: 1
-#kubeAPI: 
-#  host: "ubk3s"
-#  hostIP: "127.0.0.1"
-#  hostPort: "6443"
-#subnet: "172.28.0.0/16"
 volumes:
   - volume: C:/data/k8s:/tmp/shared
     nodeFilters:

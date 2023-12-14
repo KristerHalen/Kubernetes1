@@ -27,6 +27,18 @@ ports:
   - port: 6379:6379
     nodeFilters:
       - loadbalancer
+  - port: 9092:9092
+    nodeFilters:
+      - loadbalancer
+  - port: 9093:9093
+    nodeFilters:
+      - loadbalancer
+  - port: 9094:9094
+    nodeFilters:
+      - loadbalancer
+  - port: 9095:9095
+    nodeFilters:
+      - loadbalancer
 registries:
   create:
     name: registry
@@ -34,13 +46,18 @@ registries:
     hostPort: "5000"
     volumes:
       - C:/data/registry:/var/lib/registry # persist registry data locally
+  config: | # define contents of the `registries.yaml` file (or reference a file); same as `--registry-config /path/to/config.yaml`
+    mirrors:
+      "registry.ubk3s":
+        endpoint:
+          - http://registry.ubk3s:5000
 options:
   k3d:
     wait: true
     timeout: "60s"
   #k3s:
   #  extraArgs:
-  #    - arg: --tls-san=192.168.0.254
+  #    - arg: --tls-san=192.168.1.254
   #      nodeFilters:
   #        - server:*
   kubeconfig:

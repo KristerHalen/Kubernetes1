@@ -32,6 +32,18 @@ ports:
   - port: 6379:6379
     nodeFilters:
       - loadbalancer
+  - port: 9092:9092
+    nodeFilters:
+      - loadbalancer
+  - port: 9093:9093
+    nodeFilters:
+      - loadbalancer
+  - port: 9094:9094
+    nodeFilters:
+      - loadbalancer
+  - port: 9095:9095
+    nodeFilters:
+      - loadbalancer
 registries:
   create:
     name: registry.ubk3s
